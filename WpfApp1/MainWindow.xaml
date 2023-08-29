@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="PZ1_RACUNARSKA_GRAFIKA" Height="750" Width="750">
+    <!--<DockPanel MouseRightButtonDown="Right_ClickBiloGde" MouseLeftButtonUp="LeviPoligon_Click">-->
+    <DockPanel MouseRightButtonDown="Right_ClickBiloGde" Background="LightGray" MouseLeftButtonUp="LeviPoligon_Click">
+        <Menu x:Name="menu" Height="25" DockPanel.Dock="Top">
+            <MenuItem Header="Add Objects..." FontSize="15">
+                <MenuItem x:Name="EllipseChecked" Header="Draw Ellipse" IsCheckable="True"/>
+                <MenuItem x:Name="TextChecked" Header="Add Text" IsCheckable="True" />
+                <MenuItem x:Name="PolygonChecked" Header="Draw Polygon" IsCheckable="True"/>
+            </MenuItem>
+        </Menu>
+        <Slider x:Name="slider" Minimum="0.3" Maximum="15" Value="1" DockPanel.Dock="Top">
+            <Slider.Resources></Slider.Resources>
+        </Slider>
+        <StackPanel DockPanel.Dock="Top" Background="Yellow"  Orientation="Horizontal" VerticalAlignment="Top" Margin="10,10" Height="50">
+            <StackPanel Orientation="Horizontal" Background="DimGray" Margin="10,0">
+                <Button x:Name="UndoButton" Content="Undo" Click="Undo_Click" Width="50" Background="DarkOrange" Margin="10,10" Cursor="Hand"/>
+                <Button x:Name="ClearButton" Content="Clear" Click="Clear_Click" Width="50" Background="OrangeRed" Margin="10,10" Cursor="Hand"/>
+                <Button x:Name="RedoButton" Content="Redo" Click="Redo_Click" Width="50" Background="DarkOrange" Margin="10,10" Cursor="Hand"/>
+            </StackPanel>
+            <Button x:Name="LoadButton" Content="LOAD THE MAP" Click="Load_Click" Height="30" Width="470" Background="Aqua"  Margin="10,10" Cursor="Hand"/>
+        </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Canvas x:Name="canvas" DockPanel.Dock="Bottom" Height="600" Width="750" Background="LightGray" Focusable="True" MouseLeftButtonDown="LeviPromeniNesto_Click" >
+            <!--<Canvas x:Name="canvas" DockPanel.Dock="Bottom" Height="600" Width="750" Background="LightGray" Focusable="True" >-->
+                <Canvas.LayoutTransform>
+                    <ScaleTransform x:Name="SkaliranjeTransform" ScaleX="{Binding ElementName=slider, Path=Value}"
+                                ScaleY="{Binding ElementName=slider, Path=Value}"/>
+                </Canvas.LayoutTransform>
+            </Canvas>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
